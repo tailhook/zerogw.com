@@ -21,7 +21,7 @@ In case you want only static serving::
 
     zerogw -c config/zerogw-local.yaml
 
-In case you want everything running, you'd better run with procboss:
+In case you want everything running, you'd better run with procboss::
 
     mkdir run
     bossrun
@@ -40,5 +40,6 @@ Modify ``routes.yaml``:
 * set ``$sockets`` directory
 
 Overall:
+
 * Include ``routes.yaml`` to your config
 * Include all needed processes into your supervisor's configuration
