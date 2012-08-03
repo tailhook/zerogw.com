@@ -1,0 +1,85 @@
+routing: !Exact
+routing-by: !Header Host
+map:
+  $zerogw_com:
+    static:
+      enabled: yes
+      root: ./public
+      restrict-root: no
+      index-file: index.html
+  docs.$zerogw_com:
+    static:
+      enabled: yes
+      root: ./public/docs
+      restrict-root: no
+      index-file: index.html
+  tabbedchat.$zerogw_com:
+    routing: !Prefix ~
+    routing-by: !Uri ~
+    map:
+      "/ws*":
+        websocket:
+          enabled: yes
+          forward: !zmq.Push
+          - !zmq.Bind "ipc://$sockets/tabbedchat-auth.sock"
+          named-outputs:
+            chat: !zmq.Push
+              sync-interval: 10  # too low, for example purposes
+              =:
+              - !zmq.Bind "ipc://$sockets/tabbedchat-chat.sock"
+          subscribe: !zmq.Pull
+          - !zmq.Bind "ipc://$sockets/tabbedchat-output.sock"
+      "/":
+        static:
+          enabled: yes
+          root: ./zerogw/examples/tabbedchat/public
+          restrict-root: no
+          index-file: index.html
+      "/js/*": &static
+        static:
+          enabled: yes
+          root: ./zerogw/examples/tabbedchat/public
+          restrict-root: no
+      "/css/*": *static
+  www.$zerogw_com:
+    responses:
+      default:
+        code: 301
+        status: Moved Permanently
+        headers:
+          Location: http://zerogw.com
+        body: |
+          <html>
+            <head><title>301 Moved Permanently</title></head>
+            <body>The "www" part is ugly.
+                  <a href="http://zerogw.com">Redirecting...</a></body>
+          </html>
+  www.tabbedchat.$zerogw_com:
+    responses:
+      default:
+        code: 301
+        status: Moved Permanently
+        headers:
+          Location: http://tabbedchat.zerogw.com
+        body: |
+          <html>
+            <head><title>301 Moved Permanently</title></head>
+            <body>The "www" part is ugly.
+                  <a href="http://tabbedchat.zerogw.com">
+                  Redirecting...</a></body>
+          </html>
+  doc.$zerogw_com: &docs
+    responses:
+      default:
+        code: 301
+        status: Moved Permanently
+        headers:
+          Location: http://doc.zerogw.com
+        body: |
+          <html>
+            <head><title>301 Moved Permanently</title></head>
+            <body>The canontical url is
+                  <a href="http://docs.zerogw.com">docs.zerogw.com</a></body>
+          </html>
+  www.doc.$zerogw_com: *docs
+  www.docs.$zerogw_com: *docs

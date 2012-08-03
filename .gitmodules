@@ -1,0 +1,6 @@
+[submodule "zerogw"]
+	path = zerogw
+	url = git://github.com/tailhook/zerogw
+[submodule "public/docs"]
+	path = public/docs
+	url = git://github.com/tailhook/zerogw

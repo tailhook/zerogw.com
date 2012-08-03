@@ -1,0 +1,24 @@
+Processes:
+  zerogw:
+    executable-path: /usr/bin/zerogw
+    arguments:
+    - zerogw
+    - --config=config/zerogw-local.yaml
+  redis:
+    executable-path: /usr/bin/redis-server
+    arguments:
+    - redis-server
+    - zerogw/examples/tabbedchat/redis.conf
+  tabbedchat:
+    executable-path: /usr/bin/python3
+    environ:
+      PYTHONPATH: zerogw/examples/tabbedchat
+    arguments:
+    - python3
+    - -m
+    - tabbedchat
+    - --auth-connect=ipc://./run/tabbedchat-auth.sock
+    - --chat-connect=ipc://./run/tabbedchat-chat.sock
+    - --output-connect=ipc://./run/tabbedchat-output.sock
+
+

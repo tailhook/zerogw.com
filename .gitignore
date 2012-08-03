@@ -1,0 +1,6 @@
+/run
+/tmp
+*.pyc
+*.pyo
+__pycache__
+.boss*

@@ -1,0 +1,21 @@
+_variables:
+- &port 8000
+- &sockets ./run
+- &root "."
+- &zerogw_com localhost:8000
+
+Server:
+  zmq-io-threads: 1
+  disk-io-threads: 1
+  listen:
+    - host: 0.0.0.0
+      port: $port
+  control:
+    socket:
+    - !zmq.Bind ipc://$sockets/zerogw-ctl
+  error-log:
+    level: 3
+    warning-timeout: 300
+
+Routing: !Include routes.yaml
+
