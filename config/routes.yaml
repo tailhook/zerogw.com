@@ -14,8 +14,8 @@ map:
       restrict-root: no
       index-file: index.html
   tabbedchat.$zerogw_com:
-    routing: !Prefix ~
-    routing-by: !Uri ~
+    routing: !Prefix
+    routing-by: !Path
     map:
       "/ws*":
         websocket:
