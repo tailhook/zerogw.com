@@ -74,7 +74,7 @@ map:
         code: 301
         status: Moved Permanently
         headers:
-          Location: http://doc.zerogw.com
+          Location: http://docs.zerogw.com
         body: |
           <html>
             <head><title>301 Moved Permanently</title></head>
