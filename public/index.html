@@ -2,9 +2,17 @@
 <html>
     <head>
         <title>Zerogw</title>
+        <link href="/css/main.css" rel="stylesheet">
     </head>
     <body>
         <h1>Welcome to Zerogw's Home Page!</h1>
+        <p>
+        Zerogw is an fast HTTP server with backend protocol that uses zeromq
+        as transport. Zerogw grown from web game industry, so it supports
+        websockets with fallback to longpolling, and a few very powerful
+        websocket-related features which help to write very efficient chat,
+        gaming and other near real-time applications.
+        </p>
         <ul>
             <li><a href="http://docs.zerogw.com">Documentation</a> or
                 <a href="http://tailhook.github.com/zerogw">Github mirror</a></li>
@@ -16,6 +24,17 @@
             <li>Mailing list: <a href="http://groups.google.com/group/zerogw">
                     zerogw@googlegroups.com</a></li>
         </ul>
+        <h2>Installation</h2>
+        <h3>Ubuntu</h3>
+        <pre>
+            sudo add-apt-repository ppa:tailhook/zerogw
+            sudo apt-get install zerogw
+        </pre>
+        <h3>ArchLinux</h3>
+        <pre>
+          yaourt -S zerogw
+        </pre>
+
         <a href="https://github.com/tailhook/zerogw">
             <img style="position: absolute; top: 0; right: 0; border: 0;"
                  src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"
